@@ -6,7 +6,6 @@ class DevelopersController < ApplicationController
   def index
     @developers_search_form = DevelopersSearchForm.new(developers_search_params)
     @developers = @developers_search_form.search
-    # @developers = Developer.includes(:languages, :developer_languages).all
   end
 
   # GET /developers/1
