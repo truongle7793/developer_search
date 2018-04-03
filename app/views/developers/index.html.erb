@@ -1,12 +1,19 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Developers</h1>
+<%= form_for @developers_search_form, url: developers_path, method: :get do |search_form| %>
+  Email : <%= search_form.text_field :email %>
+  Language (Code format) : <%= search_form.text_field :language %>
+  Programming Languages : <%= search_form.text_field :programming_language %>
+  <%= search_form.submit "Search" %>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Email</th>
-      <th colspan="3"></th>
+      <th>Languages</th>
+      <th>Programming Languages</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -14,6 +21,12 @@
     <% @developers.each do |developer| %>
       <tr>
         <td><%= developer.email %></td>
+        <td>
+          <%= developer.languages.map{|l| l.code}.join(",") %>
+        </td>
+        <td>
+          <%= developer.programming_languages.map{|pl| pl.name}.join(",") %>
+        </td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
         <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
