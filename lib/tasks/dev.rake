@@ -15,17 +15,15 @@ namespace :dev do
       ProgrammingLanguage.find_or_create_by(name: Faker::ProgrammingLanguage.name)
     end
 
-    language_code_array = %w[en vn de fr ja nl el]
-    language_code_array.each do |language|
+    languages_array = %w[en vn de fr ja nl el]
+    languages_array.each do |language|
       Language.find_or_create_by(code: language)
     end
 
     Developer.all.each do |developer|
       programming_language = ProgrammingLanguage.order('RANDOM()').first
       DeveloperProgrammingLanguage.find_or_create_by(developer_id: developer.id, programming_language_id: programming_language.id)
-      # link developer with languages
-      language_array = language_code_array.sample(rand(1..3))
-      language_array.each do |lang|
+      languages_array.sample(rand(1..3)).each do |lang|
         language = Language.where(code: lang).first
         DeveloperLanguage.find_or_create_by(developer_id: developer.id, language_id: language.id)
       end
