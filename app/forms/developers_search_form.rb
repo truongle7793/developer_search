@@ -7,11 +7,13 @@ class DevelopersSearchForm
   attribute :programming_language, String
 
   def search
-    return Developer.none if !language.present? && !programming_language.present?
+    check_language = language.present?
+    check_programming_language = programming_language.present?
+    return Developer.none if !check_language && !check_programming_language
 
     query = Developer.includes(:developer_languages, :languages, :developer_programming_languages, :programming_languages)
-    query = query.where(languages: { code: language }) if language.present?
-    query = query.where(programming_languages: { name: programming_language }) if programming_language.present?
+    query = query.where(languages: { code: language }) if check_language
+    query = query.where(programming_languages: { name: programming_language }) if check_programming_language
     query = query.order('developers.created_at desc')
     query
   end
