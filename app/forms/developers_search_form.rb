@@ -7,20 +7,14 @@ class DevelopersSearchForm
   attribute :language, String
   attribute :programming_language, String
 
-  def initialize(developers_search_params = {})
-    @email = developers_search_params[:email]
-    @language = developers_search_params[:language]
-    @programming_language = developers_search_params[:programming_language]
-  end
-
   def search
-    if !@email.present? && !@language.present? && !@programming_language.present?
+    if !email.present? && !language.present? && !programming_language.present?
       Developer.none
     else
       query = Developer.includes(:developer_languages, :languages, :developer_programming_languages, :programming_languages)
-      query = query.where('developers.email like :email_search_string', email_search_string: "%#{sanitize_sql_like(@email)}%") if @email.present?
-      query = query.where(languages: { code: @language }) if @language.present?
-      query = query.where(programming_languages: { name: @programming_language }) if @programming_language.present?
+      query = query.where('developers.email like :email_search_string', email_search_string: "%#{sanitize_sql_like(email)}%") if email.present?
+      query = query.where(languages: { code: language }) if language.present?
+      query = query.where(programming_languages: { name: programming_language }) if programming_language.present?
       query = query.order('developers.created_at desc')
       query
     end
