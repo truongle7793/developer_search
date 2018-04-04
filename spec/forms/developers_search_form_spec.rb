@@ -2,18 +2,13 @@ require 'rails_helper'
 RSpec.describe DevelopersSearchForm do
   describe '#search' do
     before do
-      test_developer_one = create(:developer, email: 'tester@gmail.com')
-      test_developer_two = create(:developer, email: 'leluongtruong7793@gmail.com')
       programming_language_one = create(:programming_language, name: 'PHP')
       programming_language_two = create(:programming_language, name: 'Ruby')
       create(:programming_language, name: 'Python')
       language_one = create(:language, code: 'en')
       language_two = create(:language, code: 'vn')
-      create(:developer_programming_language, developer_id: test_developer_one.id, programming_language_id: programming_language_one.id)
-      create(:developer_programming_language, developer_id: test_developer_two.id, programming_language_id: programming_language_two.id)
-      create(:developer_language, developer_id: test_developer_one.id, language_id: language_one.id)
-      create(:developer_language, developer_id: test_developer_one.id, language_id: language_two.id)
-      create(:developer_language, developer_id: test_developer_two.id, language_id: language_two.id)
+      create(:developer, email: 'tester@gmail.com', programming_languages: [programming_language_one], languages: [language_one, language_two])
+      create(:developer, email: 'leluongtruong7793@gmail.com', programming_languages: [programming_language_two], languages: [language_two])
     end
 
     context 'Test searching with no search fields provided' do
@@ -53,18 +48,6 @@ RSpec.describe DevelopersSearchForm do
       it 'Return list of two developer that know Vietnamese' do
         form = DevelopersSearchForm.new(language: 'vn')
         expect(form.search.size).to eq(2)
-      end
-    end
-
-    context 'Test searching for developer using Email' do
-      it 'Search for developer Email that exists in database' do
-        form = DevelopersSearchForm.new(email: 'leluongtruong7793@gmail.com')
-        expect(form.search.size).to eq(1)
-      end
-
-      it 'Search for developer Email that do not exist in database' do
-        form = DevelopersSearchForm.new(email: 'leluongtruong112233@gmail.com')
-        expect(form.search.size).to eq(0)
       end
     end
 

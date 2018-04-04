@@ -21,10 +21,10 @@
       <tr>
         <td><%= developer.email %></td>
         <td>
-          <%= developer.languages.map{|l| l.code}.join(",") %>
+          <%= developer.languages.pluck(:code).join(", ") %>
         </td>
         <td>
-          <%= developer.programming_languages.map{|pl| pl.name}.join(",") %>
+          <%= developer.programming_languages.pluck(:name).join(", ") %>
         </td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
