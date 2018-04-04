@@ -10,10 +10,7 @@ namespace :dev do
       Developer.find_or_create_by(email: email)
     end
 
-    create_default_data
-    20.times do
-      ProgrammingLanguage.find_or_create_by(name: Faker::ProgrammingLanguage.name)
-    end
+    create_programming_languages
 
     languages_array = %w[en vn de fr ja nl el]
     languages_array.each do |language|
@@ -31,9 +28,12 @@ namespace :dev do
 
   end
 
-  def create_default_data
+  def create_programming_languages
     ProgrammingLanguage.find_or_create_by(name: 'Ruby')
     ProgrammingLanguage.find_or_create_by(name: 'PHP')
+    20.times do
+      ProgrammingLanguage.find_or_create_by(name: Faker::ProgrammingLanguage.name)
+    end
   end
 
 end
