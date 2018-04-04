@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h1>Developers</h1>
 <%= form_for @developers_search_form, url: developers_path, method: :get do |search_form| %>
-  Email : <%= search_form.text_field :email %>
   Language (Code format) : <%= search_form.text_field :language %>
   Programming Languages : <%= search_form.text_field :programming_language %>
   <%= search_form.submit "Search" %>
