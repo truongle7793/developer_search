@@ -2,13 +2,11 @@ require 'rails_helper'
 RSpec.describe DevelopersSearchForm do
   describe '#search' do
     before do
-      programming_language_one = create(:programming_language, name: 'PHP')
-      programming_language_two = create(:programming_language, name: 'Ruby')
       create(:programming_language, name: 'Python')
       language_one = create(:language, code: 'en')
       language_two = create(:language, code: 'vn')
-      create(:developer, email: 'tester@gmail.com', programming_languages: [programming_language_one], languages: [language_one, language_two])
-      create(:developer, email: 'leluongtruong7793@gmail.com', programming_languages: [programming_language_two], languages: [language_two])
+      create(:developer, email: 'tester@gmail.com', programming_languages: [create(:programming_language, name: 'PHP')], languages: [language_one, language_two])
+      create(:developer, email: 'leluongtruong7793@gmail.com', programming_languages: [create(:programming_language, name: 'Ruby')], languages: [language_two])
     end
 
     context 'Test searching with no search fields provided' do
