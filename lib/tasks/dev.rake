@@ -29,6 +29,7 @@ namespace :dev do
   end
 
   def create_programming_languages
+    # Make sure that there are Ruby and PHP developer language
     ProgrammingLanguage.find_or_create_by(name: 'Ruby')
     ProgrammingLanguage.find_or_create_by(name: 'PHP')
     20.times do
