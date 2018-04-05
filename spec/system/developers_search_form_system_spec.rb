@@ -25,6 +25,5 @@ describe 'Search for developer' do
     fill_in 'developers_search_form_language', with: 'en'
     click_on 'Search'
     expect(page).to have_content('tester123@gmail.com')
-    sleep 2
   end
 end
