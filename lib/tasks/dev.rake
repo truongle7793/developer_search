@@ -7,8 +7,7 @@ namespace :dev do
 
     create_programming_languages
 
-    languages_array = %w[en vn de fr ja nl el]
-    languages_array.each do |language|
+    %w[en vn de fr ja nl el].each do |language|
       Language.find_or_create_by(code: language)
     end
 
