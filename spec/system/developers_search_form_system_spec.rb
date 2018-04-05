@@ -8,20 +8,6 @@ describe 'Search for developer' do
     create(:developer, email: 'leluongtruong7793@gmail.com', programming_languages: [create(:programming_language, name: 'Ruby')], languages: [language_two])
   end
 
-  it 'Search developers with empty form fields' do
-    visit developers_path
-    click_on 'Search'
-    expect(page).to have_content('No Data Found')
-    sleep 2
-  end
-
-  it 'Search using language field' do
-    visit developers_path
-    fill_in 'developers_search_form_language', with: 'en'
-    click_on 'Search'
-    expect(page).to have_content('tester123@gmail.com')
-  end
-
   it 'Search using programming language field' do
     visit developers_path
     fill_in 'developers_search_form_programming_language', with: 'Ruby'
