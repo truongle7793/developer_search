@@ -12,15 +12,6 @@ namespace :dev do
       Language.find_or_create_by(code: language)
     end
 
-    # Developer.all.each do |developer|
-    #   programming_language = ProgrammingLanguage.order('RANDOM()').first
-    #   DeveloperProgrammingLanguage.find_or_create_by(developer_id: developer.id, programming_language_id: programming_language.id)
-    #   languages_array.sample(rand(1..3)).each do |lang|
-    #     language = Language.where(code: lang).first
-    #     DeveloperLanguage.find_or_create_by(developer_id: developer.id, language_id: language.id)
-    #   end
-    # end
-
     programming_languages = ProgrammingLanguage.all
     languages = Language.all
     100.times do
