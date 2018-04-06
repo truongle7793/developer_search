@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Developers</h1>
+<%= form_for @developers_search_form, url: developers_path, method: :get do |f| %>
+  Language (Code format) : <%= f.text_field :language %>
+  Programming Languages : <%= f.text_field :programming_language %>
+  <%= f.submit "Search" %>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Email</th>
-      <th colspan="3"></th>
+      <th>Languages</th>
+      <th>Programming Languages</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -14,6 +20,12 @@
     <% @developers.each do |developer| %>
       <tr>
         <td><%= developer.email %></td>
+        <td>
+          <%= developer.languages.pluck(:code).join(", ") %>
+        </td>
+        <td>
+          <%= developer.programming_languages.pluck(:name).join(", ") %>
+        </td>
         <td><%= link_to 'Show', developer %></td>
         <td><%= link_to 'Edit', edit_developer_path(developer) %></td>
         <td><%= link_to 'Destroy', developer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -21,6 +33,9 @@
     <% end %>
   </tbody>
 </table>
+<% if @developers.empty? %>
+  <%= "No Data Found" %>
+<% end %>
 
 <br>
 

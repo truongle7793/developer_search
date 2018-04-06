@@ -4,7 +4,8 @@ class DevelopersController < ApplicationController
   # GET /developers
   # GET /developers.json
   def index
-    @developers = Developer.all
+    @developers_search_form = DevelopersSearchForm.new(developers_search_params)
+    @developers = @developers_search_form.search
   end
 
   # GET /developers/1
@@ -62,13 +63,19 @@ class DevelopersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_developer
-      @developer = Developer.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_developer
+    @developer = Developer.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def developer_params
-      params.require(:developer).permit(:email)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def developer_params
+    params.require(:developer).permit(:email)
+  end
+
+  def developers_search_params
+    return {} if params[:developers_search_form].blank?
+    params.require(:developers_search_form).permit(:language,
+                                                   :programming_language)
+  end
 end
