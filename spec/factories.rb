@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :developer, class: Developer do
     email { Faker::Internet.email }
   end
@@ -17,5 +16,4 @@ FactoryBot.define do
 
   factory :developer_language, class: DeveloperLanguage do
   end
-
 end

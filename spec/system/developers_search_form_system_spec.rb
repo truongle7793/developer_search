@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe 'Search for developer' do
+describe 'Search for developers' do
   before do
     create(:programming_language, name: 'Python')
     language_one = create(:language, code: 'en')
@@ -8,14 +8,14 @@ describe 'Search for developer' do
     create(:developer, email: 'leluongtruong7793@gmail.com', programming_languages: [create(:programming_language, name: 'Ruby')], languages: [language_two])
   end
 
-  it 'Search using programming language field' do
+  it 'searches using programming language field' do
     visit developers_path
     fill_in 'developers_search_form_programming_language', with: 'Ruby'
     click_on 'Search'
     expect(page).to have_content('leluongtruong7793@gmail.com')
   end
 
-  it 'Search using multiple fields' do
+  it 'searches using multiple fields' do
     visit developers_path
     fill_in 'developers_search_form_programming_language', with: 'Ruby'
     fill_in 'developers_search_form_language', with: 'vn'
