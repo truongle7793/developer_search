@@ -7,35 +7,25 @@ describe 'Api::V1::DevelopersController' do
 
   describe 'GET /api/v1/developers/:developer_id' do
     before do
-      @developer = FactoryBot.create(:developer,
-                                     languages: [FactoryBot.create(:language)],
-                                     programming_languages: [FactoryBot.create(:programming_language)])
+      @developer = create(:developer,
+                          languages: [FactoryBot.create(:language)],
+                          programming_languages: [FactoryBot.create(:programming_language)])
     end
 
     context 'when the developer exists' do
-      # let(:expected_response) do
-      #   {
-      #     id: @developer.id,
-      #     email:  @developer.email,
-      #     languages: @developer.languages.to_json(only: :code),
-      #     progamming_languages: @developer.programming_languages.to_json(only: :name)
-      #   }
-      # end
       let(:expected_response) do
-        {
-          id: @developer.id,
-          email:  @developer.email,
-          languages: @developer.languages.all.map do |language|
-            {
-              code: language.code
+        @developer.as_json(
+          include: {
+            languages: {
+              only: :code
+            },
+            programming_languages: {
+              only: :name
             }
-          end,
-          programming_languages: @developer.programming_languages.all.map do |programming_language|
-            {
-              name: programming_language.name
-            }
-          end
-        }
+          },
+          except: %i[created_at updated_at],
+          status: :ok
+        ).deep_symbolize_keys
       end
 
       before do

@@ -8,6 +8,8 @@ FactoryBot.define do
   end
 
   factory :developer_programming_language, class: DeveloperProgrammingLanguage do
+    developer
+    programming_language
   end
 
   factory :language, class: Language do
@@ -15,5 +17,7 @@ FactoryBot.define do
   end
 
   factory :developer_language, class: DeveloperLanguage do
+    developer
+    language
   end
 end

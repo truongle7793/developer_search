@@ -23,7 +23,7 @@ gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
 gem 'virtus'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', require: 'bcrypt'
-gem 'faker', '~> 1.6', '>= 1.6.6'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -54,6 +54,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
+  gem 'faker', '~> 1.6', '>= 1.6.6'
   gem 'rspec-rails', '~> 3.7'
   gem "factory_bot_rails", "~> 4.0"
 end
